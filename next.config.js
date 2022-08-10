@@ -1,6 +1,16 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+module.exports = {
+  eslint: {
+    dirs: ['components', 'layouts', 'pages', 'types', 'utils'], // Only run ESLint on the 'pages' and 'utils' directories during production builds (next build)
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    })
 
-module.exports = nextConfig
+    return config
+  },
+  images: {
+    domains: ['localhost', 'tinyurl.com'],
+  },
+}
